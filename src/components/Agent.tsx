@@ -10,10 +10,17 @@ enum CallStatus {
   FINISHED = "FINISHED",
 }
 
-const Agent = ({ username, userId, type }: AgentProps) => {
+const Agent = ({ userName }: AgentProps) => {
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
 
   const isSpeaking = true;
+  const messages = [
+    "What is your name?",
+    "My name is varun kumar,  nice to meet you",
+  ];
+
+  const lastMessage = messages[messages.length - 1];
+
   return (
     <>
       <div className="call-view">
@@ -39,10 +46,26 @@ const Agent = ({ username, userId, type }: AgentProps) => {
               height={540}
               className="rounded-full object-cover size-[120px]"
             />
-            <h3>{username}</h3>
+            <h3>{userName}</h3>
           </div>
         </div>
       </div>
+
+      {messages.length > 0 && (
+        <div className="transcript-border">
+          <div className="transcript">
+            <p
+              key={lastMessage}
+              className={cn(
+                "transition-opacity duration-500 opacity-0",
+                "animate-fadeIn opacity-100"
+              )}
+            >
+              {lastMessage}
+            </p>
+          </div>
+        </div>
+      )}
       <div className="w-full flex justify-center">
         {callStatus !== "ACTIVE" ? (
           <button className="relative btn-call">
