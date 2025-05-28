@@ -7,10 +7,11 @@ enum CallStatus {
   INACTIVE = "INACTIVE",
   CONNECTING = "CONNECTING",
   ACTIVE = "ACTIVE",
-  FINISHED = "FINISHED",
+  FINISHED = "FINISHED",  
 }
 
 const Agent = ({ userName }: AgentProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
 
   const isSpeaking = true;

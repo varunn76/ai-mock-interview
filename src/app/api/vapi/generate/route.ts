@@ -4,8 +4,17 @@ import { getRandomInterviewCover } from "@/lib/utils";
 import { db } from "@/firebase/admin";
 
 export async function POST(request: Request) {
-  const { type, role, level, techstack, amount, userid } = await request.json();
+  const body = await request.json();
+  console.log("Request body:", body);
 
+  const { type, role, level, techstack, amount, userid } = body;
+
+  if (!userid) {
+    return Response.json(
+      { success: false, error: "Missing userId" },
+      { status: 400 }
+    );
+  }
   try {
     const { text: questions } = await generateText({
       model: google("gemini-2.0-flash-001"),
